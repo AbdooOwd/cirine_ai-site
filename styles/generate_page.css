@@ -1,0 +1,52 @@
+html {
+  background-color: #383a44;
+  color: white;
+}
+
+.whole {
+  padding: 2vh 5vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#chatting {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+#prompt-label {
+  padding-right: 5px;
+}
+
+#prompt {
+  width: 69%;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  background-color: #1c1d22;
+  color: white;
+  margin-bottom: 10px;
+}
+
+button {
+  width: 29%;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  background-color: #2a2b33;
+  color: white;
+  cursor: pointer;
+}
+
+.generated-text {
+  text-align: left;
+  margin-top: 20px;
+  color: white;
+}
