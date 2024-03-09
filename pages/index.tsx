@@ -33,7 +33,7 @@ const Home = () => {
       <div className="whole">
         <h1>Cirine AI</h1>
         <div className="generated-text">{generatedText}</div>
-
+        <p style={{ fontSize: "0.8rem", color: "gray" }}>By AbdooOwd</p>
         <div id="chatting">
           <input
             type="text"
@@ -46,7 +46,6 @@ const Home = () => {
           />
           <button onClick={generateText}>Generate Text</button>
         </div>
-        <p style={{ fontSize: "0.6rem" }}>By AbdooOwd</p>
       </div>
     </div>
   );
