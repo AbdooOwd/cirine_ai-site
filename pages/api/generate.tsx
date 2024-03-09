@@ -8,7 +8,7 @@ const handler = async (req, res) => {
 
     const { prompt } = req.body;
 
-    const output: Array<string> = await replicate.run(
+    const output = await replicate.run(
       "lucataco/dolphin-2.2.1-mistral-7b:0521a0090543fea1a687a871870e8f475d6581a3e6e284e32a2579cfb4433ecf",
       {
         input: {
@@ -25,7 +25,7 @@ const handler = async (req, res) => {
       },
     );
 
-    if (output && output.length > 0) {
+    if (Array.isArray(output) && output.length > 0) {
       const fullText = output.join(""); // Concatenate array elements into a single string
       return res.status(200).json({ text: fullText });
     } else {
