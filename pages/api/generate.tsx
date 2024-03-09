@@ -1,4 +1,5 @@
 import Replicate from "replicate";
+import { base_prompt } from "./config";
 
 const handler = async (req, res) => {
   try {
@@ -16,9 +17,8 @@ const handler = async (req, res) => {
           top_p: 0.95,
           prompt: prompt,
           temperature: 0.8,
-          max_new_tokens: 512,
-          prompt_template:
-            "system\nyou are an expert dolphin trainer\n\nuser\n{prompt}\nassistant\n",
+          max_new_tokens: 1024,
+          prompt_template: base_prompt,
           presence_penalty: 0,
           frequency_penalty: 0,
         },

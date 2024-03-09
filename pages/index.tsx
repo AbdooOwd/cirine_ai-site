@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Head from "next/head";
 
 const Home = () => {
   const [generatedText, setGeneratedText] = useState("");
@@ -28,12 +29,24 @@ const Home = () => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      setPrompt("");
+      generateText();
+    }
+  };
+
   return (
     <div>
+      <Head>
+        <title>Cirine AI By AbdooOwd</title>
+      </Head>
+
       <div className="whole">
-        <h1>Cirine AI</h1>
+        <h1>
+          Cirine AI <span style={{ fontSize: "0.7rem" }}>By AbdooOwd</span>
+        </h1>
         <div className="generated-text">{generatedText}</div>
-        <p style={{ fontSize: "0.8rem", color: "gray" }}>By AbdooOwd</p>
         <div id="chatting">
           <input
             type="text"
@@ -41,6 +54,7 @@ const Home = () => {
             name="prompt"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
+            onKeyDown={handleKeyPress}
             placeholder="Chat..."
             required
           />
