@@ -25,7 +25,7 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setGeneratedText("An error occured!");
+      setGeneratedText(`An error occured!\nError: ${error}`);
     }
   };
 

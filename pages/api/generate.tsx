@@ -1,5 +1,5 @@
 import Replicate from "replicate";
-import { base_prompt } from "./config";
+import { get_base_prompt, set_last_input, set_last_output } from "./config";
 
 const handler = async (req, res) => {
   try {
@@ -19,7 +19,7 @@ const handler = async (req, res) => {
           prompt: prompt, // The user's prompt
           temperature: 0.8,
           max_new_tokens: 1024,
-          prompt_template: base_prompt, // The... AI's brain?
+          prompt_template: get_base_prompt(), // The... AI's brain?
           presence_penalty: 0,
           frequency_penalty: 0,
         },
@@ -27,7 +27,10 @@ const handler = async (req, res) => {
     );
 
     if (Array.isArray(output) && output.length > 0) {
+      // success
       const fullText = output.join(""); // Put thing into one string
+      set_last_input(prompt);
+      set_last_output(fullText);
       return res.status(200).json({ text: fullText });
     } else {
       return res.status(200).json({ error: "No choices available" });
