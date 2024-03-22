@@ -11,17 +11,21 @@ const handler = async (req, res) => {
 
     const chat = model.startChat({
       history: [
-        {
+        { // the personality fix was coded on mobile btw (a galaxy F12)
+          
+          // The idea is giving the user data to the user role.
+          // but then we also give the ai's personality in that user role and we use 'you'.
+          // and then we make the ai say: "yes i shall respect those rules blah blah blah"
           role: "user",
-          parts: [{ text: abdoo_data }],
+          parts: [{ text: `${abdoo_data} You MUST respect these rules that define your personality: "${personality} ${core_data}"` }],
         },
         {
           role: "model",
-          parts: [{ text: `${personality} ${core_data}` }],
+          parts: [{ text: `Alright, I must then respect this personality.` }],
         },
       ],
       generationConfig: {
-        maxOutputTokens: 2024, // haha
+        maxOutputTokens: 1024, // haha (originally 2024)
       },
     });
 
