@@ -49,3 +49,28 @@ button {
   text-align: left;
   color: white;
 }
+
+#messages-container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0 1vw;
+  border-radius: 8px;
+}
+
+.message {
+  /*background-color: #2c2e35;*/
+  padding: 2vh 3vw;
+  border-radius: 8px;
+  margin: 2vh 0;
+  width: 65%;
+}
+
+.bot-msg {
+  background-color: #3d4561;
+  margin-left: auto;
+}
+
+.user-msg {
+  background-color: #2c2e35;
+  margin-right: auto;
+}
