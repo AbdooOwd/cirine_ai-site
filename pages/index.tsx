@@ -2,12 +2,13 @@ import { useState } from "react";
 import Head from "next/head";
 
 const Home = () => {
-  const [generatedText, setGeneratedText] = useState("");
+  const [messages, setMessages] = useState<string[]>([]);
   const [prompt, setPrompt] = useState(""); // State to store user input
 
   const generateText = async () => {
     try {
-      setGeneratedText("Typing...");
+      console.log("Typing...");
+
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -19,13 +20,14 @@ const Home = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setGeneratedText(data.text);
+        console.log(`> User: ${prompt}\n> Cirine: ${data.text}`);
+        setMessages([...messages, prompt, data.text]);
       } else {
-        setGeneratedText(`Error: ${data.error}`);
+        setMessages([...messages, `Error: ${data.error}`]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setGeneratedText(`An error occured!\nError: ${error}`);
+      setMessages([...messages, `An error occured!\n Error: ${error}`]);
     }
   };
 
@@ -46,7 +48,16 @@ const Home = () => {
         <h1>
           Cirine AI <span style={{ fontSize: "0.7rem" }}>By AbdooOwd</span>
         </h1>
-        <div className="generated-text">{generatedText}</div>
+        <div id="messages-container">
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`message ${index % 2 === 0 ? "bot-msg" : "user-msg"}`}
+            >
+              {message}
+            </div>
+          ))}
+        </div>
         <div id="chatting">
           <input
             type="text"
@@ -56,6 +67,7 @@ const Home = () => {
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyPress}
             placeholder="Chat..."
+            autoComplete="off"
             required
           />
           <button onClick={generateText}>Generate Text</button>
