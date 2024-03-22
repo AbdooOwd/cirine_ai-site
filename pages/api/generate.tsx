@@ -1,4 +1,3 @@
-import Replicate from "replicate";
 import { abdoo_data, core_data, personality } from "./config";
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
