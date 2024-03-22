@@ -4,10 +4,12 @@ import Head from "next/head";
 const Home = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const [prompt, setPrompt] = useState(""); // State to store user input
+  const [resState, setResState] = useState(false);
 
   const generateText = async () => {
     try {
       console.log("Typing...");
+      setResState(true);
 
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -29,6 +31,8 @@ const Home = () => {
       console.error("Error fetching data:", error);
       setMessages([...messages, `An error occured!\n Error: ${error}`]);
     }
+
+    setResState(false);
   };
 
   const handleKeyPress = (e) => {
@@ -48,6 +52,11 @@ const Home = () => {
         <h1>
           Cirine AI <span style={{ fontSize: "0.7rem" }}>By AbdooOwd</span>
         </h1>
+        {resState && (
+          <div className="leLoading">
+            <div className="realLoading"></div>
+          </div>
+        )}
         <div id="messages-container">
           {messages.map((message, index) => (
             <div
